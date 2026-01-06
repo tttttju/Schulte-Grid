@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>舒尔特格子 - iPad 版</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>舒尔特格子</h1>
+    <button id="parentAccess" class="parent-access" aria-label="家长入口">
+      家长入口
+    </button>
+  </header>
+
+  <main class="app">
+    <section id="homeView" class="view view-active">
+      <div class="card">
+        <h2>开始游戏</h2>
+        <div class="form-group">
+          <label>选择模式</label>
+          <div class="segmented" role="tablist">
+            <button class="segmented-btn is-active" data-mode="number">数字模式</button>
+            <button class="segmented-btn" data-mode="english">英文模式</button>
+            <button class="segmented-btn" data-mode="chinese">汉字模式</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>网格大小</label>
+          <div class="segmented" role="tablist">
+            <button class="segmented-btn" data-size="3">3 × 3</button>
+            <button class="segmented-btn is-active" data-size="4">4 × 4</button>
+            <button class="segmented-btn" data-size="5">5 × 5</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>练习方式</label>
+          <div class="segmented" role="tablist">
+            <button class="segmented-btn is-active" data-timer="countup">正计时</button>
+            <button class="segmented-btn" data-timer="countdown">倒计时</button>
+          </div>
+          <div id="countdownConfig" class="countdown-config is-hidden">
+            <label for="countdownSeconds">倒计时秒数</label>
+            <input id="countdownSeconds" type="number" min="10" max="300" value="60" />
+          </div>
+        </div>
+        <button id="startGame" class="primary-btn">开始</button>
+      </div>
+
+      <div class="card">
+        <h2>最佳成绩</h2>
+        <div id="bestStats" class="stats-grid"></div>
+      </div>
+    </section>
+
+    <section id="gameView" class="view">
+      <div class="game-header">
+        <div class="game-target">
+          目标：<span id="targetValue">1</span>
+        </div>
+        <div class="game-info">
+          <span id="timerDisplay">00:00</span>
+          <span>错误：<span id="errorCount">0</span></span>
+        </div>
+      </div>
+      <div id="grid" class="grid"></div>
+      <div class="game-actions">
+        <button id="pauseGame" class="ghost-btn">暂停</button>
+        <button id="restartGame" class="ghost-btn">重开</button>
+        <button id="backHome" class="ghost-btn">返回</button>
+      </div>
+    </section>
+
+    <section id="resultView" class="view">
+      <div class="card">
+        <h2>完成！</h2>
+        <div class="result-summary">
+          <p>用时：<span id="resultTime">00:00</span></p>
+          <p>错误：<span id="resultErrors">0</span></p>
+          <p>星星奖励：<span id="resultStars">★★★</span></p>
+        </div>
+        <div id="recentScores" class="recent-scores"></div>
+        <button id="playAgain" class="primary-btn">再玩一次</button>
+        <button id="backHomeFromResult" class="ghost-btn">返回首页</button>
+      </div>
+    </section>
+
+    <section id="settingsView" class="view">
+      <div class="card">
+        <h2>设置</h2>
+        <div class="form-group">
+          <label>音效</label>
+          <label class="switch">
+            <input id="soundToggle" type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="form-group">
+          <label>难度</label>
+          <select id="difficultySelect">
+            <option value="easy">简单</option>
+            <option value="normal" selected>标准</option>
+            <option value="hard">挑战</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>英文大小写</label>
+          <select id="caseSelect">
+            <option value="upper" selected>大写</option>
+            <option value="lower">小写</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>护眼模式</label>
+          <label class="switch">
+            <input id="eyeCareToggle" type="checkbox" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <button id="closeSettings" class="primary-btn">完成</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay is-hidden">
+    <div class="overlay-card">
+      <p id="overlayText">已暂停</p>
+      <button id="resumeGame" class="primary-btn">继续</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
